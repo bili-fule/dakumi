@@ -1,7 +1,7 @@
 utf8 = require("utf8")
 socket = require("socket") --网络通信
 ffi = require("ffi") --调用C语言库
-nuklear = require 'nuklear' --图形界面
+--nuklear = require 'nuklear' --图形界面
 serpent = require("function/serpent") --lua序列化
 require("function/music")
 require("function/beat_and_time")
