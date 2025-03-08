@@ -1,4 +1,4 @@
-version = "0.3.4"
+version = "0.3.5"
 beat = {nowbeat = 0,allbeat = 100}
 time = {nowtime = 0 ,alltime = 100}
 denom = {scale = 1,denom = 4} --分度的缩放和使用的分度
@@ -60,7 +60,7 @@ meta_settings = { --设置基本格式 元表
     }
 }
 
-require('the_require')
+require 'the_require'
 
 function the_room_pos(pos) -- 房间状态判定
     local isroom = false
@@ -80,19 +80,7 @@ end
 function love.load()
     --初始化
     love.graphics.setFont(font)
-    -- 读取文本文件
-    --local chart_file = io.open("chart.txt", "r")  -- 以只读模式打开文件
-    --if chart_file then
-    --    local content = chart_file:read("*a")  -- 读取整个文件内容
-    --    chart_file:close()  -- 关闭文件
-    --    chart = loadstring("return "..content)()
-    --end
-    --if type(chart) ~= "table" then
-    --    chart = {}
-    --end
     setmetatable(chart,meta_chart) --防谱报废
-    --fillMissingElements(chart,meta_chart.__index)
-        -- 读取语言
         local language_file = io.open("language.txt", "r")  -- 以只读模式打开文件
         if language_file then
             local content = language_file:read("*a")  -- 读取整个文件内容
@@ -118,38 +106,7 @@ function love.load()
     
     fillMissingElements(settings,meta_settings.__index)
     love.resize( settings.window_width, settings.window_height )  --缩放窗口
-    love.window.setMode(settings.window_width, settings.window_height, {resizable = true})  
-
-    --    local music_esist = false
-    --    music_error = ""
-    --    -- 读取音频文件
-    --    local music_file = io.open("music.wav", "r")  -- 以只读模式打开文件
-    --    local music_file2 = io.open("music.ogg", "r")  -- 以只读模式打开文件
-    --    local music_file3 = io.open("music.mp3", "r")  -- 以只读模式打开文件
-    --    if music_file then
-    --        music_esist,music_error = pcall(function() music = love.audio.newSource("music.wav", "stream") music_data.soundData = love.sound.newSoundData("music.wav")  end)
-    --    elseif music_file2 then
-    --        music_esist,music_error = pcall(function() music = love.audio.newSource("music.ogg", "stream") music_data.soundData = love.sound.newSoundData("music.wav") end)
-    --    elseif music_file3 then
-    --        music_esist,music_error = pcall(function() music = love.audio.newSource("music.mp3", "stream") music_data.soundData = love.sound.newSoundData("music.wav") end)
-    --    end
-    --    if music_esist then
-    --        music_data.count = music_data.soundData:getSampleCount() --用来显示音频图
-    --        time.alltime = music:getDuration() + chart.offset / 1000 -- 得到音频总时长
-    --        beat.allbeat = time_to_beat(chart.bpm_list,time.alltime)
-    --    end
-
-
-    --local bg_flie = io.open("bg.png", "r")  -- 以只读模式打开文件
-    --local bg_flie2 = io.open("bg.jpg", "r")  -- 以只读模式打开文件
-    --bg_esist,bg_error = false,""
-    --if bg_flie then
-    ---- 读取图片文件
-    --    bg_esist,bg_error = pcall(function() bg = love.graphics.newImage("bg.png") end)
-    --elseif bg_flie2 then
-    --    -- 读取图片文件
-    --    bg_esist,bg_error = pcall(function() bg = love.graphics.newImage("bg.jpg") end)
-    --end
+    love.window.setMode(settings.window_width, settings.window_height, {resizable = true})
     room_play.load()
     room_sidebar.load()
     room_select.load()
@@ -160,7 +117,6 @@ function love.load()
     objact_message_box.message("start")
     love.keyboard.setKeyRepeat(true) --键重复
 
-    
 end
 function love.update(dt)
     if love.window.getFullscreen()  then  --全屏

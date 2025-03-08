@@ -10,7 +10,7 @@ local function do_up()
     music_speed = music_speed + 0.1
 end
 local function do_down()
-    music_speed = math.abs(music_speed - 0.2) + 0.1--防止非自然数
+    music_speed = math.max(music_speed - 0.1,0.1)
 end
 objact_music_speed = { --分度改变用的
     load = function(x1,y1,r1,w1,h1)

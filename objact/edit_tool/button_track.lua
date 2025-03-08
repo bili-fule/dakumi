@@ -10,7 +10,7 @@ local function do_up()
     track.track = track.track + 1
 end
 local function do_down()
-    track.track = math.abs(track.track - 2) + 1--防止非自然数
+    track.track = math.max(track.track - 1,1)
 end
 objact_track = { --改变现在显示的轨道
     load = function(x1,y1,r1,w1,h1)

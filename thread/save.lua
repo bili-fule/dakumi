@@ -1,4 +1,4 @@
-
+serpent = require("function/serpent") --lua序列化
 require("function/save")
 require("function/log")
 require("function/table")
@@ -52,6 +52,10 @@ while true do
         fillMissingElements(chart,meta_chart.__index)
         if type(path) == "string" and #path > 0 then
             local s = love.filesystem.write(path , tableToString(chart) )
+            local nowdate = os.date("%Y-%m-%d %H %M %S")
+
+            love.filesystem.newFile('auto_save/'..nowdate.."save.d3")
+            log(love.filesystem.write('auto_save/'..nowdate.."save.d3" , tableToString(chart) ))
             if s then
                 log("save:"..tostring(s))
             end

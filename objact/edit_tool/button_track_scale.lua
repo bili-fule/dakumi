@@ -10,7 +10,7 @@ local function do_up()
     denom.scale = denom.scale + 0.1
 end
 local function do_down()
-    denom.scale = math.abs(denom.scale - 0.2) + 0.1--防止非自然数
+    denom.scale = math.max(denom.scale - 0.1,0.1)
 end
 objact_track_scale = { --分度改变用的
     load = function(x1,y1,r1,w1,h1)

@@ -11,7 +11,7 @@ local function do_up()
     track.fence = track.fence + 1
 end
 local function do_down()
-    track.fence = math.abs(track.fence - 1)--防止非自然数
+    track.fence = math.max(track.fence - 1,1)
 end
 objact_track_fence = { --分度改变用的
     load = function(x1,y1,r1,w1,h1)
