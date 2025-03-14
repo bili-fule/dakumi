@@ -58,8 +58,10 @@ jobs:
         mv test/dakumi_editor_temp.exe test/dakumi_editor.exe
 
     - name: Create Release
+      if: startsWith(github.ref, 'refs/tags/')
       uses: softprops/action-gh-release@v1
       with:
-        tag: ${{ github.ref }}
+        tag_name: ${{ github.ref_name }}
+        name: Release ${{ github.ref_name }}
         files: |
           test/**  # 发布test目录下的所有文件
