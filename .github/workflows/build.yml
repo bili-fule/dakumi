@@ -17,10 +17,7 @@ jobs:
 #      run: |
 #        curl -L -o love.zip https://github.com/love2d/love/releases/download/11.4/love-11.4-win64.zip
 #        unzip love.zip
-    - name: 下载Resource Hacker
-      run: |
-        curl -L -o resource_hacker.zip http://www.angusj.com/resourcehacker/resource_hacker.zip
-        unzip resource_hacker.zip
+
 
     - name: 复制需要打包的文件
       run: |
@@ -49,10 +46,6 @@ jobs:
         cp 7z.dll test/
         cp language.txt test/
         ls
-
-    - name: 使用Resource Hacker修改图标
-      run: |
-        ./resource_hacker/ResourceHacker.exe -open test/dakumi_editor.exe -save test/dakumi_editor.exe -action addskip -resource "icon.ico"-mask ICON,ICONRESOURCE
 
     - name: 上传制品
       uses: actions/upload-artifact@v4
