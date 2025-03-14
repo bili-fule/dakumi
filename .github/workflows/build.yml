@@ -11,6 +11,8 @@ on:
 jobs:
   build:
     runs-on: windows-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.TOKEN }}
 
     steps:
     - uses: actions/checkout@v4
@@ -46,18 +48,18 @@ jobs:
         cp 7z.dll test/
         cp language.txt test/
 
- 
-        - name: 使用Resource Hacker修改图标
+    - name: 使用Resource Hacker修改图标
       run: |
         ./ResourceHacker.exe -open test/dakumi_editor.exe -save test/dakumi_editor_temp.exe -action addoverwrite -res icon.ico -mask ICONGROUP,MAINICON,0
 
-        - name: 删除旧文件
+    - name: 删除旧文件
       run: |
         del test/dakumi_editor.exe
         mv test/dakumi_editor_temp.exe test/dakumi_editor.exe
 
-        - name: 上传制品
-      uses: actions/upload-artifact@v4
+    - name: Create Release
+      uses: softprops/action-gh-release@v1
       with:
-        name: dakumi_editor_windows
-        path: test
+        tag: ${{ github.ref }}
+        files: |
+          test/**  # 发布test目录下的所有文件
