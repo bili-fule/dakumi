@@ -3,6 +3,8 @@ name: Build and Package
 on:
   push:
     branches: [ main ]
+    tags:
+      - 'v*'
   pull_request:
     branches: [ main ]
 
@@ -44,14 +46,17 @@ jobs:
         cp 7z.dll test/
         cp language.txt test/
 
-    - name: 使用Resource Hacker修改图标
+ 
+        - name: 使用Resource Hacker修改图标
       run: |
         ./ResourceHacker.exe -open test/dakumi_editor.exe -save test/dakumi_editor_temp.exe -action addoverwrite -res icon.ico -mask ICONGROUP,MAINICON,0
-    - name: 删除旧文件
+
+        - name: 删除旧文件
       run: |
         del test/dakumi_editor.exe
         mv test/dakumi_editor_temp.exe test/dakumi_editor.exe
-    - name: 上传制品
+
+        - name: 上传制品
       uses: actions/upload-artifact@v4
       with:
         name: dakumi_editor_windows
