@@ -34,18 +34,18 @@ jobs:
         cp LXGWNeoXiHei_LICENSE.md dakumi/
 
 
-        
-        
-
-
     - name: 打包游戏
       run: |
         zip -r game.zip dakumi/
-        cat love-11.4-win64/love.exe game.zip > dakumi_editor.exe
-        zip -r dakumi_editor_windows.zip dakumi_editor.exe
+        cat love-11.4-win64/love.exe game.zip > love-11.4-win64/dakumi_editor.exe
+        cp hit_sound.ogg love-11.4-win64/
+        cp 7z.exe love-11.4-win64/
+        cp 7z.dll love-11.4-win64/
+        cp language.json love-11.4-win64/
+        ls
 
     - name: 上传制品
       uses: actions/upload-artifact@v4
       with:
         name: dakumi_editor_windows
-        path: dakumi_editor_windows.zip 
+        path: love-11.4-win64
