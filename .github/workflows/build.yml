@@ -60,5 +60,7 @@ jobs:
       uses: softprops/action-gh-release@v2
       with:
         token: ${{ secrets.TOKEN }}
+        tag_name: ${{ github.ref_name }}
+        name: Release ${{ github.ref_name }}
         files: |
           test/**  # 发布test目录下的所有文件
