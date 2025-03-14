@@ -46,7 +46,7 @@ jobs:
 
     - name: 使用Resource Hacker修改图标
       run: |
-        ./ResourceHacker.exe -open test/dakumi_editor.exe -save test/dakumi_editor.exe -action addoverwrite -res test/icon.ico -mask ICONGROUP,MAINICON,0
+        ./ResourceHacker.exe -open test/dakumi_editor.exe -save test/dakumi_editor.exe -action addoverwrite -res icon.ico -mask ICONGROUP,MAINICON,0
 
     - name: 上传制品
       uses: actions/upload-artifact@v4
