@@ -1,4 +1,3 @@
-
 local x = 0
 local y = 0
 local w = 0
@@ -11,6 +10,11 @@ local function will_draw()
     return the_room_pos('select')
 end
 local function will_do()
+        if not chart_tab[select_music_pos] then
+            objact_message_box.message_window_dlsplay('Please select a music folder first',function() end,function() end)
+            return
+        end
+        
         objact_message_box.message("new_chart")
         local name = "chart/"..chart_tab[select_music_pos].."/new_chart"
         while love.filesystem.getInfo( name..".d3" )  do
