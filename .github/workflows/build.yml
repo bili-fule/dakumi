@@ -18,6 +18,8 @@ jobs:
 #        curl -L -o love.zip https://github.com/love2d/love/releases/download/11.4/love-11.4-win64.zip
 #        unzip love.zip
 
+    - name: Install rcedit
+      run: npm install -g rcedit
 
     - name: 复制需要打包的文件
       run: |
@@ -47,6 +49,9 @@ jobs:
         cp language.txt test/
         ls
 
+    - name: 使用rcedit修改图标
+      run: rcedit test/dakumi_editor.exe --set-icon test/icon.ico
+      
     - name: 上传制品
       uses: actions/upload-artifact@v4
       with:
