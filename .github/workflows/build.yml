@@ -18,8 +18,16 @@ jobs:
 #        curl -L -o love.zip https://github.com/love2d/love/releases/download/11.4/love-11.4-win64.zip
 #        unzip love.zip
 
+    - name: Install Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+
     - name: Install rcedit
-      run: npm install -g rcedit
+      run: |
+        npm install -g rcedit
+        npm list -g rcedit
+        which rcedit
 
     - name: 复制需要打包的文件
       run: |
@@ -51,6 +59,7 @@ jobs:
 
     - name: 使用rcedit修改图标
       run: |
+        export PATH="$PATH:$(npm bin -g)"
         rcedit test/dakumi_editor.exe --set-icon test/icon.ico
 
     - name: 上传制品
