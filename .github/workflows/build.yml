@@ -12,7 +12,6 @@ jobs:
   build:
     runs-on: windows-latest
 
-
     steps:
     - uses: actions/checkout@v4
     
@@ -56,6 +55,12 @@ jobs:
         del test/dakumi_editor.exe
         mv test/dakumi_editor_temp.exe test/dakumi_editor.exe
 
+    - name: 打包
+      run: |
+        cd test
+        Compress-Archive -Path * -DestinationPath dakumi_editor.zip -Force
+        cd ..
+
     - name: Release
       uses: softprops/action-gh-release@v2
       with:
@@ -63,4 +68,4 @@ jobs:
         tag_name: ${{ github.ref_name }}
         name: Release ${{ github.ref_name }}
         files: |
-          test/**  # 发布test目录下的所有文件
+          test/dakumi_editor.zip
