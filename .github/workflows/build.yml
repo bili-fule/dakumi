@@ -11,8 +11,7 @@ on:
 jobs:
   build:
     runs-on: windows-latest
-    env:
-      GITHUB_TOKEN: ${{ secrets.TOKEN }}
+
 
     steps:
     - uses: actions/checkout@v4
@@ -57,9 +56,9 @@ jobs:
         del test/dakumi_editor.exe
         mv test/dakumi_editor_temp.exe test/dakumi_editor.exe
 
-    - name: Create Release
-      uses: softprops/action-gh-release@v1
+    - name: Release
+      uses: softprops/action-gh-release@v2
       with:
-        tag: ${{ github.ref }}
+        token: ${{ secrets.TOKEN }}
         files: |
           test/**  # 发布test目录下的所有文件
