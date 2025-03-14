@@ -8,32 +8,15 @@ on:
 
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [windows-latest, ubuntu-latest, macos-latest]
-        include:
-          - os: windows-latest
-            artifact_name: dakumi_editor_windows
-          - os: ubuntu-latest
-            artifact_name: dakumi_editor_linux
-          - os: macos-latest
-            artifact_name: dakumi_editor_macos
+    runs-on: windows-latest
 
     steps:
     - uses: actions/checkout@v2
     
     - name: Download LÖVE
       run: |
-        if [ "${{ matrix.os }}" = "windows-latest" ]; then
-          curl -L -o love.zip https://github.com/love2d/love/releases/download/11.4/love-11.4-win64.zip
-          unzip love.zip
-        elif [ "${{ matrix.os }}" = "ubuntu-latest" ]; then
-          sudo apt-get update
-          sudo apt-get install -y love
-        elif [ "${{ matrix.os }}" = "macos-latest" ]; then
-          brew install love
-        fi
+        curl -L -o love.zip https://github.com/love2d/love/releases/download/11.4/love-11.4-win64.zip
+        unzip love.zip
 
     - name: Create Game Directory
       run: |
@@ -51,18 +34,12 @@ jobs:
 
     - name: Package Game
       run: |
-        if [ "${{ matrix.os }}" = "windows-latest" ]; then
-          zip -r game.zip game/
-          cat love-11.4-win64/love.exe game.zip > dakumi_editor.exe
-          zip -r dakumi_editor_windows.zip dakumi_editor.exe
-        elif [ "${{ matrix.os }}" = "ubuntu-latest" ]; then
-          zip -r dakumi_editor_linux.zip game/
-        elif [ "${{ matrix.os }}" = "macos-latest" ]; then
-          zip -r dakumi_editor_macos.zip game/
-        fi
+        zip -r game.zip game/
+        cat love-11.4-win64/love.exe game.zip > dakumi_editor.exe
+        zip -r dakumi_editor_windows.zip dakumi_editor.exe
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
       with:
-        name: ${{ matrix.artifact_name }}
-        path: ${{ matrix.artifact_name }}.zip 
+        name: dakumi_editor_windows
+        path: dakumi_editor_windows.zip 
