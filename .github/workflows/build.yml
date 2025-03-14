@@ -38,16 +38,16 @@ jobs:
         cd dakumi
         Compress-Archive -Path * -DestinationPath ../game.zip -Force
         cd ..
-        Get-Content test/love.exe, game.zip -Raw | Set-Content test/dakumi_editor.exe -NoNewline
+        cmd.exe /c "copy /b test\love.exe+game.zip test\dakumi_editor.exe"
         cp hit_sound.ogg test/
         cp 7z.exe test/
         cp 7z.dll test/
         cp language.txt test/
 
- #   - name: 使用Resource Hacker修改图标
- #     run: |
- #       ./ResourceHacker.exe -open test/dakumi_editor.exe -save test/dakumi_editor.exe -action addoverwrite -res test/icon.ico -mask ICONGROUP,MAINICON,0
- 
+    - name: 使用Resource Hacker修改图标
+      run: |
+        ./ResourceHacker.exe -open test/dakumi_editor.exe -save test/dakumi_editor.exe -action addoverwrite -res test/icon.ico -mask ICONGROUP,MAINICON,0
+
     - name: 上传制品
       uses: actions/upload-artifact@v4
       with:
