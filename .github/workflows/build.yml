@@ -51,7 +51,7 @@ jobs:
       run: |
         del test/dakumi_editor.exe
         cmd.exe /c "copy test\dakumi_editor_temp.exe test\dakumi_editor.exe"
-
+        del test/dakumi_editor_temp.exe
     - name: 上传制品
       uses: actions/upload-artifact@v4
       with:
