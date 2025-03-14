@@ -13,10 +13,10 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     
-    - name: 下载LÖVE
-      run: |
-        curl -L -o love.zip https://github.com/love2d/love/releases/download/11.4/love-11.4-win64.zip
-        unzip love.zip
+#    - name: 下载LÖVE
+#      run: |
+#        curl -L -o love.zip https://github.com/love2d/love/releases/download/11.4/love-11.4-win64.zip
+#        unzip love.zip
 
     - name: 复制需要打包的文件
       run: |
@@ -37,15 +37,15 @@ jobs:
     - name: 打包游戏
       run: |
         zip -r game.zip dakumi/
-        cat love-11.4-win64/love.exe game.zip > love-11.4-win64/dakumi_editor.exe
-        cp hit_sound.ogg love-11.4-win64/
-        cp 7z.exe love-11.4-win64/
-        cp 7z.dll love-11.4-win64/
-        cp language.txt love-11.4-win64/
+        cat test/love.exe game.zip > test/dakumi_editor.exe
+        cp hit_sound.ogg test/
+        cp 7z.exe test/
+        cp 7z.dll test/
+        cp language.txt test/
         ls
 
     - name: 上传制品
       uses: actions/upload-artifact@v4
       with:
         name: dakumi_editor_windows
-        path: love-11.4-win64
+        path: test
