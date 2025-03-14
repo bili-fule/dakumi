@@ -41,7 +41,7 @@ jobs:
         cp hit_sound.ogg love-11.4-win64/
         cp 7z.exe love-11.4-win64/
         cp 7z.dll love-11.4-win64/
-        cp language.json love-11.4-win64/
+        cp language.txt love-11.4-win64/
         ls
 
     - name: 上传制品
