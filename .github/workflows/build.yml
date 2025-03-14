@@ -13,32 +13,38 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     
-    - name: Download LÖVE
+    - name: 下载LÖVE
       run: |
         curl -L -o love.zip https://github.com/love2d/love/releases/download/11.4/love-11.4-win64.zip
         unzip love.zip
 
-    - name: Create Game Directory
+    - name: 复制需要打包的文件
       run: |
-        mkdir -p game
-        if (Test-Path *.lua) { Copy-Item *.lua game/ }
-        if (Test-Path function) { Copy-Item -Recurse function game/ }
-        if (Test-Path objact) { Copy-Item -Recurse objact game/ }
-        if (Test-Path room) { Copy-Item -Recurse room game/ }
-        if (Test-Path asset) { Copy-Item -Recurse asset game/ }
-        if (Test-Path chart) { Copy-Item -Recurse chart game/ }
-        if (Test-Path temporary) { Copy-Item -Recurse temporary game/ }
-        if (Test-Path auto_save) { Copy-Item -Recurse auto_save game/ }
-        if (Test-Path ui) { Copy-Item -Recurse ui game/ }
-        if (Test-Path export) { Copy-Item -Recurse export game/ }
+        mkdir -p dakumi
+        cp -r asset dakumi/
+        cp -r function dakumi/
+        cp -r objact dakumi/
+        cp -r room dakumi/
+        cp -r thread dakumi/
+        cp conf.lua dakumi/
+        cp main.lua dakumi/
+        cp the_require.lua dakumi/
+        cp icon.ico dakumi/
+        cp LXGWNeoXiHei.ttf dakumi/
+        cp LXGWNeoXiHei_LICENSE.md dakumi/
 
-    - name: Package Game
+
+        
+        
+
+
+    - name: 打包游戏
       run: |
-        zip -r game.zip game/
+        zip -r game.zip dakumi/
         cat love-11.4-win64/love.exe game.zip > dakumi_editor.exe
         zip -r dakumi_editor_windows.zip dakumi_editor.exe
 
-    - name: Upload Artifact
+    - name: 上传制品
       uses: actions/upload-artifact@v4
       with:
         name: dakumi_editor_windows
