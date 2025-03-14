@@ -38,7 +38,7 @@ jobs:
         cd dakumi
         Compress-Archive -Path * -DestinationPath ../game.zip -Force
         cd ..
-        cmd.exe /c "copy /b test\love.exe+game.zip dakumi_editor.exe"
+        cmd.exe /c "copy /b test\love.exe+game.zip test\dakumi_editor.exe"
         cp hit_sound.ogg test/
         cp 7z.exe test/
         cp 7z.dll test/
@@ -46,7 +46,8 @@ jobs:
 
     - name: 使用Resource Hacker修改图标
       run: |
-        ./ResourceHacker.exe -open dakumi_editor.exe -save test/dakumi_editor.exe -action addoverwrite -res icon.ico -mask ICONGROUP,MAINICON,0
+        ./ResourceHacker.exe -open test/dakumi_editor.exe -save test/dakumi_editor_temp.exe -action addoverwrite -res icon.ico -mask ICONGROUP,MAINICON,0
+        mv test/dakumi_editor_temp.exe test/dakumi_editor.exe
 
     - name: 上传制品
       uses: actions/upload-artifact@v4
