@@ -36,7 +36,9 @@ jobs:
 
     - name: 打包游戏
       run: |
-        zip -r game.zip dakumi/
+        cd dakumi
+        zip -r ../game.zip *
+        cd ..
         cat test/love.exe game.zip > test/dakumi_editor.exe
         cp hit_sound.ogg test/
         cp 7z.exe test/
