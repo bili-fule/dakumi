@@ -47,6 +47,8 @@ jobs:
     - name: 使用Resource Hacker修改图标
       run: |
         ./ResourceHacker.exe -open test/dakumi_editor.exe -save test/dakumi_editor_temp.exe -action addoverwrite -res icon.ico -mask ICONGROUP,MAINICON,0
+    - name: 删除旧文件
+      run: |
         del test/dakumi_editor.exe
         cmd.exe /c "copy test\dakumi_editor_temp.exe test\dakumi_editor.exe"
 
