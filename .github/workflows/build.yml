@@ -13,15 +13,10 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     
-    - name: 安装Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '18'
-
-    - name: 安装rcedit
+    - name: 下载Resource Hacker
       run: |
-        npm install rcedit
-        npm install -g rcedit
+        curl -L -o resource_hacker.zip http://www.angusj.com/resourcehacker/resource_hacker.zip
+        unzip resource_hacker.zip
 
     - name: 复制需要打包的文件
       run: |
@@ -49,9 +44,9 @@ jobs:
         cp 7z.dll test/
         cp language.txt test/
 
-    - name: 使用rcedit修改图标
+    - name: 使用Resource Hacker修改图标
       run: |
-        node_modules/.bin/rcedit test/dakumi_editor.exe --set-icon icon.ico
+        ./ResourceHacker.exe -open test/dakumi_editor.exe -save test/dakumi_editor.exe -action addoverwrite -res icon.ico -mask ICONGROUP,MAINICON,0
 
     - name: 上传制品
       uses: actions/upload-artifact@v4
